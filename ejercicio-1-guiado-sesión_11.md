@@ -12,26 +12,25 @@ El objetivo de esta sesión es diseñar e implementar una interfaz gráfica de u
 ## 2. Requerimientos Técnicos y de Diseño
 
 ### 2.1. Arquitectura de la Interfaz (`Layouts`)
-* **Contenedor Raíz (`root_layout`):** `BoxLayout` de orientación vertical (`orientation='vertical'`), con padding interno de `10px` y espaciado de `10px`.
-* **Sección Superior (Visor y Controles):**
+* **Contenedor Raíz (`root_layout`):** `BoxLayout` de orientación vertical (`orientation='vertical'`), con padding de `10px` y espaciado de `10px`.
+* **Sección Superior (Visor y Control):**
   * `BoxLayout` horizontal (`orientation='horizontal'`) con `size_hint_y=0.2` y `spacing=5`.
-  * `TextInput` para el visor (`readonly=True`, `halign='right'`, `font_size=32`, `size_hint_x=0.75`).
-  * `Button` de reinicio/limpiado (`C`) con `size_hint_x=0.25` y `font_size=24`.
+  * `TextInput` para el visor (`text="0"`, `readonly=True`, `halign="right"`, `font_size=32`, `size_hint_x=0.75`).
+  * `Button` de limpiado **`C`** con `size_hint_x=0.25` y `font_size=24`.
 * **Sección Inferior (Teclado):**
-  * `GridLayout` configurado estrictamente en **4 columnas × 5 filas** (`cols=4`, `rows=5`, `size_hint_y=0.8`).
-  * Matriz completa de 20 botones distribuidos funcionalmente:
-    * **Fila 1:** `(`, `)`, `%`, `**`
-    * **Fila 2:** `7`, `8`, `9`, `*`
-    * **Fila 3:** `4`, `5`, `6`, `/`
-    * **Fila 4:** `1`, `2`, `3`, `-`
-    * **Fila 5:** `0`, `.`, `=`, `+`
+  * `GridLayout` de **4 columnas × 4 filas** (`cols=4`, `rows=4`, `size_hint_y=0.8`).
+  * Distribución exacta de los 16 botones en la cuadrícula (17 botones en total contando el botón `C` superior):
+    * **Fila 1:** `7`, `8`, `9`, `*`
+    * **Fila 2:** `4`, `5`, `6`, `/`
+    * **Fila 3:** `1`, `2`, `3`, `-`
+    * **Fila 4:** `0`, `.`, `=`, `+`
 
 ### 2.2. Lógica de Negocio y Manejo de Eventos
-* **Asignación de Eventos:** Uso del método `.bind(on_press=...)` asignado dinámicamente a cada botón para dirigir la interacción al método callback `on_button_press`.
-* **Operaciones Aritméticas:** Evaluación dinámica de expresiones mediante evaluación controlada de cadenas de texto.
-* **Control de Excepciones:** Captura de errores de sintaxis o división por cero, mostrando la etiqueta `"Error"` en el visor.
-* **Comportamiento del Visor:** 
-  * Al presionar `C`, restablecer el visor a `"0"`.
-  * Si el estado actual es `"0"` o `"Error"`, la entrada de un nuevo número reemplaza el visor.
+* **Enlace de Eventos:** Uso del método `.bind(on_press=self.on_button_press)` asignado dinámicamente a cada botón.
+* **Procesamiento de Expresiones:** Manejo dinámico de caracteres y cálculo final con `eval()` al presionar `=`.
+* **Manejo de Errores:** Bloque `try-except` para capturar errores de sintaxis o división por cero, mostrando la palabra `"Error"` en el visor.
+* **Comportamiento del Visor:**
+  * Al pulsar `C`, la pantalla vuelve a `"0"`.
+  * Si el visor muestra `"0"`, la pulsación de un nuevo dígito reemplaza el cero inicial.
 
 ---
