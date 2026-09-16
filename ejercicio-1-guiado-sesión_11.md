@@ -1,6 +1,4 @@
-```text?code_stdout&code_event_index=1
-Traceback (most recent call last):
-  File "<xbox-string>", line 61
+
     content = """# EJERCICIO 1 — GUIADO — SESIÓN 11
 ## Diseño de Interfaces Gráficas: Calculadora y Layouts
 
