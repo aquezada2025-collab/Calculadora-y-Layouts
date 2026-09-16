@@ -1,5 +1,5 @@
 
-    content = """# EJERCICIO 1 — GUIADO — SESIÓN 11
+# EJERCICIO 1 — GUIADO — SESIÓN 11
 ## Diseño de Interfaces Gráficas: Calculadora y Layouts
 
 ---
